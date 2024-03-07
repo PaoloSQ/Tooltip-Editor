@@ -28,15 +28,15 @@ function dibujarPunto(x, y) {
 // Calcula área utilizando el método de Shoelace
 function calcularArea() {
   if (vertices.length >= 3) {
-    let area = 0;
-    for (let i = 0; i < vertices.length; i++) {
-      const nextIndex = (i + 1) % vertices.length;
-      area +=
-        vertices[i].x * vertices[nextIndex].y -
-        vertices[nextIndex].x * vertices[i].y;
+    ctx.beginPath();
+    ctx.moveTo(vertices[0].x, vertices[0].y);
+    for (let i = 1; i < vertices.length; i++) {
+      ctx.lineTo(vertices[i].x, vertices[i].y);
     }
-    area = Math.abs(area) / 2;
-    info.innerHTML = "Área del polígono:" + area;
+    ctx.closePath();
+    ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+    ctx.fill();
+    info.innerHTML = "Área coloreada";
   } else {
     info.innerHTML = "Necesitas al menos 3 vértices para formar un polígono.";
   }
